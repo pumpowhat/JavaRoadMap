@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-18-jdbc-c%C6%A1-b%E1%BA%A3n">Bài 18: JDBC Cơ Bản</h1>
+<p>JDBC (Java Database Connectivity) là API cho phép ứng dụng Java kết nối và tương tác với cơ sở dữ liệu.</p>
+<h2 id="1-ki%E1%BA%BFn-tr%C3%BAc-jdbc">1. Kiến trúc JDBC</h2>
+<pre class="hljs"><code><div>Ứng dụng Java ──► JDBC API ──► JDBC Driver ──► Database
+                                           ├── MySQL
+                                           ├── Oracle
+                                           └── PostgreSQL
+</div></code></pre>
+<ul>
+<li>JDBC API cung cấp các interface và class chung để làm việc với database.</li>
+<li>JDBC Driver là thư viện do hệ quản trị cơ sở dữ liệu cung cấp để Java giao tiếp với database đó.</li>
+</ul>
+<p>Các loại JDBC Driver:</p>
+<table>
+<thead>
+<tr>
+<th>Loại</th>
+<th>Tên</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type 1</td>
+<td>JDBC-ODBC Bridge</td>
+<td>Cũ, không còn dùng trong Java hiện đại</td>
+</tr>
+<tr>
+<td>Type 2</td>
+<td>Native-API Driver</td>
+<td>Cần thư viện native của database</td>
+</tr>
+<tr>
+<td>Type 3</td>
+<td>Network Protocol Driver</td>
+<td>Giao tiếp qua một middleware server</td>
+</tr>
+<tr>
+<td>Type 4</td>
+<td>Thin Driver</td>
+<td>Driver thuần Java, phổ biến nhất hiện nay</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-drivermanager">2. DriverManager</h2>
+<ul>
+<li><code>DriverManager</code> quản lý danh sách JDBC driver.</li>
+<li>Dùng để thiết lập kết nối tới database.</li>
+<li>Với JDBC 4 trở lên, driver thường được tự động nạp khi đã có trong classpath.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.sql.Connection;
+<span class="hljs-keyword">import</span> java.sql.DriverManager;
+<span class="hljs-keyword">import</span> java.sql.SQLException;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/java_db&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">password</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;your_password&quot;</span>;
+
+<span class="hljs-type">Connection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> DriverManager.getConnection(url, username, password);
+</div></code></pre>
+<h2 id="3-connection">3. Connection</h2>
+<ul>
+<li><code>Connection</code> đại diện cho một phiên làm việc với cơ sở dữ liệu.</li>
+<li>Được tạo từ <code>DriverManager</code> hoặc <code>DataSource</code>.</li>
+<li>Cần đóng kết nối sau khi dùng xong.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/java_db&quot;</span>;
+
+<span class="hljs-keyword">try</span> (<span class="hljs-type">Connection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> DriverManager.getConnection(url, <span class="hljs-string">&quot;root&quot;</span>, <span class="hljs-string">&quot;your_password&quot;</span>)) {
+    <span class="hljs-comment">// Sử dụng kết nối tại đây</span>
+}
+</div></code></pre>
+<blockquote>
+<p><code>try-with-resources</code> tự động gọi <code>close()</code> khi kết thúc khối lệnh.</p>
+</blockquote>
+<h2 id="4-statement">4. Statement</h2>
+<ul>
+<li><code>Statement</code> dùng để thực thi các câu lệnh SQL đơn giản.</li>
+<li>Không an toàn khi ghép trực tiếp dữ liệu người dùng vào SQL vì có nguy cơ SQL Injection.</li>
+<li>Phù hợp với câu SQL cố định, không có tham số đầu vào.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;SELECT id, name FROM users&quot;</span>;
+
+<span class="hljs-keyword">try</span> (<span class="hljs-type">Statement</span> <span class="hljs-variable">stmt</span> <span class="hljs-operator">=</span> conn.createStatement();
+     <span class="hljs-type">ResultSet</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span> stmt.executeQuery(sql)) {
+    <span class="hljs-comment">// Đọc kết quả từ rs</span>
+}
+</div></code></pre>
+<h2 id="5-preparedstatement">5. PreparedStatement</h2>
+<ul>
+<li><code>PreparedStatement</code> là phiên bản an toàn hơn của <code>Statement</code>.</li>
+<li>Dùng dấu <code>?</code> làm tham số và gán giá trị qua các hàm <code>set...()</code>.</li>
+<li>Giúp tránh SQL Injection và thường hiệu quả hơn khi tái sử dụng câu lệnh.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;SELECT id, name FROM users WHERE id = ?&quot;</span>;
+
+<span class="hljs-keyword">try</span> (<span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">ps</span> <span class="hljs-operator">=</span> conn.prepareStatement(sql)) {
+    ps.setInt(<span class="hljs-number">1</span>, <span class="hljs-number">101</span>);
+
+    <span class="hljs-keyword">try</span> (<span class="hljs-type">ResultSet</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span> ps.executeQuery()) {
+        <span class="hljs-comment">// Đọc kết quả từ rs</span>
+    }
+}
+</div></code></pre>
+<h2 id="6-resultset">6. ResultSet</h2>
+<ul>
+<li><code>ResultSet</code> đại diện cho kết quả trả về của một truy vấn <code>SELECT</code>.</li>
+<li>Con trỏ ban đầu đứng trước dòng dữ liệu đầu tiên.</li>
+<li>Dùng <code>next()</code> để di chuyển lần lượt qua từng dòng.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">while</span> (rs.next()) {
+    <span class="hljs-type">int</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> rs.getInt(<span class="hljs-string">&quot;id&quot;</span>);
+    <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> rs.getString(<span class="hljs-string">&quot;name&quot;</span>);
+    System.out.println(id + <span class="hljs-string">&quot; - &quot;</span> + name);
+}
+</div></code></pre>
+<h2 id="7-s%C6%A1-%C4%91%E1%BB%93-quy-tr%C3%ACnh-crud">7. Sơ đồ quy trình CRUD</h2>
+<table>
+<thead>
+<tr>
+<th>Thao tác</th>
+<th>SQL</th>
+<th>Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tạo mới (Create)</td>
+<td><code>INSERT</code></td>
+<td><code>INSERT INTO users(name, email) VALUES (?, ?)</code></td>
+</tr>
+<tr>
+<td>Đọc (Read)</td>
+<td><code>SELECT</code></td>
+<td><code>SELECT * FROM users WHERE id = ?</code></td>
+</tr>
+<tr>
+<td>Cập nhật (Update)</td>
+<td><code>UPDATE</code></td>
+<td><code>UPDATE users SET name = ? WHERE id = ?</code></td>
+</tr>
+<tr>
+<td>Xóa (Delete)</td>
+<td><code>DELETE</code></td>
+<td><code>DELETE FROM users WHERE id = ?</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Dùng <code>executeQuery()</code> cho <code>SELECT</code> để nhận về <code>ResultSet</code>.</li>
+<li>Dùng <code>executeUpdate()</code> cho <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> để nhận số dòng bị ảnh hưởng.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;INSERT INTO users(name, email) VALUES (?, ?)&quot;</span>;
+
+<span class="hljs-keyword">try</span> (<span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">ps</span> <span class="hljs-operator">=</span> conn.prepareStatement(sql)) {
+    ps.setString(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;An&quot;</span>);
+    ps.setString(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;an@example.com&quot;</span>);
+
+    <span class="hljs-type">int</span> <span class="hljs-variable">rows</span> <span class="hljs-operator">=</span> ps.executeUpdate();
+    System.out.println(<span class="hljs-string">&quot;Số dòng đã thêm: &quot;</span> + rows);
+}
+</div></code></pre>
+<h2 id="8-%C4%91i%E1%BB%83m-ch%C3%ADnh">8. Điểm chính</h2>
+<ul>
+<li>Nạp JDBC driver (thường tự động từ JDBC 4 trở lên).</li>
+<li>Lấy <code>Connection</code>.</li>
+<li>Tạo <code>Statement</code> hoặc ưu tiên <code>PreparedStatement</code>.</li>
+<li>Thực thi câu truy vấn SQL.</li>
+<li>Xử lý <code>ResultSet</code> nếu có.</li>
+<li>Đóng tài nguyên.</li>
+</ul>
+<h2 id="9-th%E1%BB%B1c-h%C3%A0nh-t%E1%BB%91t">9. Thực hành tốt</h2>
+<ul>
+<li>Ưu tiên <code>PreparedStatement</code> để an toàn và hiệu quả hơn.</li>
+<li>Luôn đóng tài nguyên bằng <code>try-with-resources</code>.</li>
+<li>Không ghi mật khẩu database trực tiếp vào mã nguồn; dùng biến môi trường hoặc file cấu hình bảo mật.</li>
+<li>Giao dịch gồm nhiều thao tác liên quan nên dùng transaction.</li>
+</ul>
+<h2 id="10-c%C3%A1c-l%E1%BB%97i-th%C6%B0%E1%BB%9Dng-g%E1%BA%B7p">10. Các lỗi thường gặp</h2>
+<table>
+<thead>
+<tr>
+<th>Vấn đề</th>
+<th>Cách tránh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quên đóng tài nguyên</td>
+<td>Dùng <code>try-with-resources</code></td>
+</tr>
+<tr>
+<td>SQL Injection</td>
+<td>Không nối trực tiếp dữ liệu người dùng vào SQL; dùng <code>PreparedStatement</code></td>
+</tr>
+<tr>
+<td>Không xử lý <code>SQLException</code></td>
+<td>Bắt hoặc khai báo ngoại lệ và ghi log phù hợp</td>
+</tr>
+<tr>
+<td>Thiếu JDBC driver</td>
+<td>Thêm đúng dependency/driver của database vào project</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

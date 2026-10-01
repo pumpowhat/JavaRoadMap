@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-23-dependency-injection-trong-java">Bài 23: Dependency Injection trong Java</h1>
+<p>Dependency Injection (DI) là kỹ thuật cung cấp các dependency cần thiết cho một object từ bên ngoài thay vì để object tự tạo dependency đó.</p>
+<p>DI giúp code giảm sự phụ thuộc, dễ thay đổi implementation, dễ kiểm thử và dễ mở rộng.</p>
+<h2 id="1-dependency-l%C3%A0-g%C3%AC">1. Dependency là gì?</h2>
+<p>Dependency là một object mà class cần sử dụng để thực hiện nhiệm vụ.</p>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">EmailService</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span> {
+        System.out.println(<span class="hljs-string">&quot;Gửi email: &quot;</span> + message);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-type">EmailService</span> <span class="hljs-variable">emailService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmailService</span>();
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">register</span><span class="hljs-params">(String username)</span> {
+        emailService.send(<span class="hljs-string">&quot;User mới: &quot;</span> + username);
+    }
+}
+</div></code></pre>
+<p>Trong ví dụ trên, UserService phụ thuộc vào EmailService.</p>
+<h2 id="2-v%E1%BA%A5n-%C4%91%E1%BB%81-khi-t%E1%BB%B1-t%E1%BA%A1o-dependency">2. Vấn đề khi tự tạo dependency</h2>
+<p>Khi class tự tạo dependency:</p>
+<ul>
+<li>Class bị liên kết chặt với một implementation cụ thể.</li>
+<li>Khó thay đổi EmailService thành SmsService.</li>
+<li>Khó viết unit test.</li>
+<li>Class vừa xử lý nghiệp vụ vừa chịu trách nhiệm tạo object.</li>
+<li>Khó quản lý vòng đời của dependency.</li>
+</ul>
+<h2 id="3-dependency-injection-l%C3%A0-g%C3%AC">3. Dependency Injection là gì?</h2>
+<p>Thay vì tự tạo EmailService, UserService nhận EmailService từ bên ngoài:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> EmailService emailService;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">UserService</span><span class="hljs-params">(EmailService emailService)</span> {
+        <span class="hljs-built_in">this</span>.emailService = emailService;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">register</span><span class="hljs-params">(String username)</span> {
+        emailService.send(<span class="hljs-string">&quot;User mới: &quot;</span> + username);
+    }
+}
+</div></code></pre>
+<p>Khởi tạo object:</p>
+<pre class="hljs"><code><div><span class="hljs-type">EmailService</span> <span class="hljs-variable">emailService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmailService</span>();
+<span class="hljs-type">UserService</span> <span class="hljs-variable">userService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserService</span>(emailService);
+</div></code></pre>
+<p>EmailService là dependency được inject vào UserService.</p>
+<h2 id="4-inversion-of-control">4. Inversion of Control</h2>
+<p>Inversion of Control (IoC) nghĩa là quyền kiểm soát việc tạo và cung cấp object được chuyển từ class sang một thành phần bên ngoài.</p>
+<p>Không dùng IoC:</p>
+<pre class="hljs"><code><div>UserService tự tạo EmailService
+</div></code></pre>
+<p>Dùng IoC:</p>
+<pre class="hljs"><code><div>Application hoặc DI Container tạo EmailService
+                    ↓
+             inject vào UserService
+</div></code></pre>
+<p>Dependency Injection là một cách phổ biến để thực hiện IoC.</p>
+<h2 id="5-constructor-injection">5. Constructor Injection</h2>
+<p>Constructor Injection cung cấp dependency thông qua constructor.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">interface</span> <span class="hljs-title class_">MessageSender</span> {
+    <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span>;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> MessageSender messageSender;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">UserService</span><span class="hljs-params">(MessageSender messageSender)</span> {
+        <span class="hljs-built_in">this</span>.messageSender = messageSender;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">register</span><span class="hljs-params">(String username)</span> {
+        messageSender.send(<span class="hljs-string">&quot;Đăng ký user: &quot;</span> + username);
+    }
+}
+</div></code></pre>
+<p>Implementation:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">EmailSender</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MessageSender</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span> {
+        System.out.println(<span class="hljs-string">&quot;Email: &quot;</span> + message);
+    }
+}
+</div></code></pre>
+<p>Sử dụng:</p>
+<pre class="hljs"><code><div><span class="hljs-type">MessageSender</span> <span class="hljs-variable">sender</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmailSender</span>();
+<span class="hljs-type">UserService</span> <span class="hljs-variable">userService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserService</span>(sender);
+
+userService.register(<span class="hljs-string">&quot;An&quot;</span>);
+</div></code></pre>
+<p>Ưu điểm:</p>
+<ul>
+<li>Dependency bắt buộc được cung cấp ngay khi tạo object.</li>
+<li>Field có thể khai báo final.</li>
+<li>Object luôn ở trạng thái hợp lệ.</li>
+<li>Dễ kiểm thử.</li>
+<li>Dependency được thể hiện rõ qua constructor.</li>
+</ul>
+<h2 id="6-setter-injection">6. Setter Injection</h2>
+<p>Setter Injection cung cấp dependency thông qua setter method.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">ReportService</span> {
+    <span class="hljs-keyword">private</span> Printer printer;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">setPrinter</span><span class="hljs-params">(Printer printer)</span> {
+        <span class="hljs-built_in">this</span>.printer = printer;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">printReport</span><span class="hljs-params">(String content)</span> {
+        <span class="hljs-keyword">if</span> (printer == <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(<span class="hljs-string">&quot;Printer chưa được cấu hình&quot;</span>);
+        }
+
+        printer.print(content);
+    }
+}
+</div></code></pre>
+<p>Ưu điểm:</p>
+<ul>
+<li>Dependency có thể thay đổi sau khi object được tạo.</li>
+<li>Phù hợp với dependency không bắt buộc.</li>
+</ul>
+<p>Nhược điểm:</p>
+<ul>
+<li>Có thể quên gọi setter.</li>
+<li>Object có thể ở trạng thái chưa hoàn chỉnh.</li>
+<li>Không thể khai báo dependency là final.</li>
+</ul>
+<h2 id="7-field-injection">7. Field Injection</h2>
+<p>Field Injection gán dependency trực tiếp vào field, thường thông qua Reflection hoặc framework.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> {
+    <span class="hljs-meta">@Inject</span>
+    <span class="hljs-keyword">private</span> PaymentService paymentService;
+}
+</div></code></pre>
+<p>Cách này thường thấy trong framework như Spring, nhưng không nên ưu tiên trong code thông thường.</p>
+<p>Nhược điểm:</p>
+<ul>
+<li>Dependency bị ẩn.</li>
+<li>Khó tạo object bằng new trong unit test.</li>
+<li>Field không thể final.</li>
+<li>Object có thể chưa sẵn sàng sau constructor.</li>
+<li>Phụ thuộc nhiều vào framework.</li>
+</ul>
+<h2 id="8-so-s%C3%A1nh-c%C3%A1c-ki%E1%BB%83u-injection">8. So sánh các kiểu Injection</h2>
+<table>
+<thead>
+<tr>
+<th>Kiểu</th>
+<th>Cách cung cấp</th>
+<th>Ưu điểm</th>
+<th>Nhược điểm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constructor Injection</td>
+<td>Qua constructor</td>
+<td>Rõ ràng, an toàn, dễ test</td>
+<td>Constructor có thể nhiều tham số</td>
+</tr>
+<tr>
+<td>Setter Injection</td>
+<td>Qua setter</td>
+<td>Dependency có thể thay đổi</td>
+<td>Có thể quên cấu hình</td>
+</tr>
+<tr>
+<td>Field Injection</td>
+<td>Gán vào field</td>
+<td>Viết ít code</td>
+<td>Khó test, phụ thuộc framework</td>
+</tr>
+</tbody>
+</table>
+<p>Thông thường nên ưu tiên Constructor Injection.</p>
+<h2 id="9-dependency-inversion-principle">9. Dependency Inversion Principle</h2>
+<p>Dependency Inversion Principle (DIP) là nguyên tắc trong SOLID:</p>
+<ul>
+<li>Module cấp cao không nên phụ thuộc trực tiếp vào module cấp thấp.</li>
+<li>Cả hai nên phụ thuộc vào abstraction.</li>
+<li>Abstraction không nên phụ thuộc vào detail.</li>
+<li>Detail nên phụ thuộc vào abstraction.</li>
+</ul>
+<p>Không tốt:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">MySqlOrderRepository</span> <span class="hljs-variable">repository</span> <span class="hljs-operator">=</span>
+            <span class="hljs-keyword">new</span> <span class="hljs-title class_">MySqlOrderRepository</span>();
+}
+</div></code></pre>
+<p>Tốt hơn:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">interface</span> <span class="hljs-title class_">OrderRepository</span> {
+    <span class="hljs-type">void</span> <span class="hljs-title function_">save</span><span class="hljs-params">(String order)</span>;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MySqlOrderRepository</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OrderRepository</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">save</span><span class="hljs-params">(String order)</span> {
+        System.out.println(<span class="hljs-string">&quot;Lưu order vào MySQL: &quot;</span> + order);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> OrderRepository repository;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">OrderService</span><span class="hljs-params">(OrderRepository repository)</span> {
+        <span class="hljs-built_in">this</span>.repository = repository;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">createOrder</span><span class="hljs-params">(String order)</span> {
+        repository.save(order);
+    }
+}
+</div></code></pre>
+<p>OrderService chỉ biết OrderRepository, không cần biết database cụ thể.</p>
+<h2 id="10-thay-%C4%91%E1%BB%95i-implementation">10. Thay đổi implementation</h2>
+<p>Nhờ phụ thuộc vào interface, có thể thay implementation mà không sửa OrderService.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">InMemoryOrderRepository</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">OrderRepository</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">save</span><span class="hljs-params">(String order)</span> {
+        System.out.println(<span class="hljs-string">&quot;Lưu order vào bộ nhớ: &quot;</span> + order);
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-type">OrderRepository</span> <span class="hljs-variable">repository</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InMemoryOrderRepository</span>();
+<span class="hljs-type">OrderService</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OrderService</span>(repository);
+</div></code></pre>
+<p>Có thể thay MySQL bằng PostgreSQL, MongoDB, file hoặc fake repository.</p>
+<h2 id="11-di-v%C3%A0-unit-test">11. DI và Unit Test</h2>
+<p>Không dùng DI:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">PriceService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">ProductRepository</span> <span class="hljs-variable">repository</span> <span class="hljs-operator">=</span>
+            <span class="hljs-keyword">new</span> <span class="hljs-title class_">MySqlProductRepository</span>();
+}
+</div></code></pre>
+<p>Khi test, code luôn gọi MySQL thật.</p>
+<p>Dùng DI:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">interface</span> <span class="hljs-title class_">ProductRepository</span> {
+    <span class="hljs-type">double</span> <span class="hljs-title function_">findPrice</span><span class="hljs-params">(String productCode)</span>;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">PriceService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ProductRepository repository;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">PriceService</span><span class="hljs-params">(ProductRepository repository)</span> {
+        <span class="hljs-built_in">this</span>.repository = repository;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getPrice</span><span class="hljs-params">(String productCode)</span> {
+        <span class="hljs-keyword">return</span> repository.findPrice(productCode);
+    }
+}
+</div></code></pre>
+<p>Fake repository:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">FakeProductRepository</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ProductRepository</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findPrice</span><span class="hljs-params">(String productCode)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">100.0</span>;
+    }
+}
+</div></code></pre>
+<p>Test:</p>
+<pre class="hljs"><code><div><span class="hljs-type">ProductRepository</span> <span class="hljs-variable">fakeRepository</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FakeProductRepository</span>();
+<span class="hljs-type">PriceService</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriceService</span>(fakeRepository);
+
+<span class="hljs-type">double</span> <span class="hljs-variable">price</span> <span class="hljs-operator">=</span> service.getPrice(<span class="hljs-string">&quot;JAVA&quot;</span>);
+
+System.out.println(price); <span class="hljs-comment">// 100.0</span>
+</div></code></pre>
+<p>Không cần database thật để kiểm thử PriceService.</p>
+<h2 id="12-di-th%E1%BB%A7-c%C3%B4ng-kh%C3%B4ng-c%E1%BA%A7n-framework">12. DI thủ công không cần framework</h2>
+<p>DI không bắt buộc phải dùng Spring.</p>
+<p>Có thể tự tạo dependency trong class khởi động:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Application</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">ProductRepository</span> <span class="hljs-variable">repository</span> <span class="hljs-operator">=</span>
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">MySqlProductRepository</span>();
+
+        <span class="hljs-type">PriceService</span> <span class="hljs-variable">priceService</span> <span class="hljs-operator">=</span>
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriceService</span>(repository);
+
+        priceService.getPrice(<span class="hljs-string">&quot;JAVA&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>Class Application đóng vai trò Composition Root, nơi các object được tạo và kết nối với nhau.</p>
+<h2 id="13-composition-root">13. Composition Root</h2>
+<p>Composition Root là nơi tập trung việc:</p>
+<ul>
+<li>Tạo implementation.</li>
+<li>Tạo dependency.</li>
+<li>Kết nối các object.</li>
+<li>Cấu hình application.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Application</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">MessageSender</span> <span class="hljs-variable">sender</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmailSender</span>();
+        <span class="hljs-type">UserService</span> <span class="hljs-variable">userService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserService</span>(sender);
+
+        userService.register(<span class="hljs-string">&quot;An&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>Các class nghiệp vụ không cần tự tạo dependency.</p>
+<h2 id="14-di-trong-spring">14. DI trong Spring</h2>
+<p>Spring có IoC Container để tạo và inject object.</p>
+<p>Interface:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">NotificationSender</span> {
+    <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span>;
+}
+</div></code></pre>
+<p>Implementation:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">EmailNotificationSender</span>
+        <span class="hljs-keyword">implements</span> <span class="hljs-title class_">NotificationSender</span> {
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span> {
+        System.out.println(<span class="hljs-string">&quot;Email: &quot;</span> + message);
+    }
+}
+</div></code></pre>
+<p>Service:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> NotificationSender sender;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">UserService</span><span class="hljs-params">(NotificationSender sender)</span> {
+        <span class="hljs-built_in">this</span>.sender = sender;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">register</span><span class="hljs-params">(String username)</span> {
+        sender.send(<span class="hljs-string">&quot;User mới: &quot;</span> + username);
+    }
+}
+</div></code></pre>
+<p>Spring sẽ:</p>
+<ol>
+<li>Tạo EmailNotificationSender.</li>
+<li>Tạo UserService.</li>
+<li>Tìm dependency NotificationSender.</li>
+<li>Inject EmailNotificationSender vào UserService.</li>
+</ol>
+<h2 id="15-m%E1%BB%99t-s%E1%BB%91-annotation-spring">15. Một số annotation Spring</h2>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Mục đích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Component</td>
+<td>Bean tổng quát</td>
+</tr>
+<tr>
+<td>@Service</td>
+<td>Bean chứa logic nghiệp vụ</td>
+</tr>
+<tr>
+<td>@Repository</td>
+<td>Bean truy cập dữ liệu</td>
+</tr>
+<tr>
+<td>@Controller</td>
+<td>Bean xử lý request web</td>
+</tr>
+<tr>
+<td>@RestController</td>
+<td>Controller trả về dữ liệu REST</td>
+</tr>
+<tr>
+<td>@Configuration</td>
+<td>Class chứa cấu hình bean</td>
+</tr>
+</tbody>
+</table>
+<p>@Service và @Repository là các stereotype annotation chuyên biệt của @Component.</p>
+<h2 id="16-constructor-injection-trong-spring">16. Constructor Injection trong Spring</h2>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PaymentService paymentService;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">OrderService</span><span class="hljs-params">(PaymentService paymentService)</span> {
+        <span class="hljs-built_in">this</span>.paymentService = paymentService;
+    }
+}
+</div></code></pre>
+<p>Với Spring hiện đại, nếu class chỉ có một constructor thì thường không cần @Autowired.</p>
+<h2 id="17-bean-v%C3%A0-configuration">17. @Bean và @Configuration</h2>
+<p>Có thể tạo dependency bằng Java configuration:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Configuration</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppConfig</span> {
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">NotificationSender</span> <span class="hljs-title function_">notificationSender</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmailNotificationSender</span>();
+    }
+
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">UserService</span> <span class="hljs-title function_">userService</span><span class="hljs-params">(
+            NotificationSender notificationSender)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserService</span>(notificationSender);
+    }
+}
+</div></code></pre>
+<p>Spring đọc cấu hình và quản lý các object được khai báo bằng @Bean.</p>
+<h2 id="18-qualifier-khi-c%C3%B3-nhi%E1%BB%81u-implementation">18. Qualifier khi có nhiều implementation</h2>
+<p>Nếu có nhiều implementation của cùng một interface:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Component(&quot;emailSender&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">EmailSender</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MessageSender</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span> {
+        System.out.println(<span class="hljs-string">&quot;Email: &quot;</span> + message);
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">@Component(&quot;smsSender&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SmsSender</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MessageSender</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String message)</span> {
+        System.out.println(<span class="hljs-string">&quot;SMS: &quot;</span> + message);
+    }
+}
+</div></code></pre>
+<p>Có thể chọn implementation bằng @Qualifier:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">NotificationService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> MessageSender sender;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">NotificationService</span><span class="hljs-params">(
+            <span class="hljs-meta">@Qualifier(&quot;smsSender&quot;)</span> MessageSender sender)</span> {
+        <span class="hljs-built_in">this</span>.sender = sender;
+    }
+}
+</div></code></pre>
+<h2 id="19-primary-implementation">19. Primary implementation</h2>
+<p>Có thể đánh dấu một implementation là mặc định:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Primary</span>
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">EmailSender</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MessageSender</span> {
+}
+</div></code></pre>
+<p>Khi có nhiều MessageSender nhưng không có @Qualifier, Spring sẽ ưu tiên implementation có @Primary.</p>
+<h2 id="20-bean-scope">20. Bean Scope</h2>
+<p>Scope xác định vòng đời và số lượng instance của bean.</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>singleton</td>
+<td>Một instance trong Spring Container</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>Tạo instance mới mỗi lần yêu cầu</td>
+</tr>
+<tr>
+<td>request</td>
+<td>Một instance cho mỗi HTTP request</td>
+</tr>
+<tr>
+<td>session</td>
+<td>Một instance cho mỗi HTTP session</td>
+</tr>
+<tr>
+<td>application</td>
+<td>Một instance cho toàn bộ web application</td>
+</tr>
+</tbody>
+</table>
+<p>Mặc định bean trong Spring có scope singleton.</p>
+<h2 id="21-v%C3%B2ng-l%E1%BA%B7p-dependency">21. Vòng lặp dependency</h2>
+<p>Vòng lặp dependency xảy ra khi:</p>
+<pre class="hljs"><code><div>A cần B
+B cần A
+</div></code></pre>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">ServiceA</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ServiceB serviceB;
+
+    ServiceA(ServiceB serviceB) {
+        <span class="hljs-built_in">this</span>.serviceB = serviceB;
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ServiceB</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ServiceA serviceA;
+
+    ServiceB(ServiceA serviceA) {
+        <span class="hljs-built_in">this</span>.serviceA = serviceA;
+    }
+}
+</div></code></pre>
+<p>Đây thường là dấu hiệu thiết kế chưa tốt.</p>
+<p>Cách xử lý:</p>
+<ul>
+<li>Tách trách nhiệm của class.</li>
+<li>Tạo abstraction trung gian.</li>
+<li>Dùng event hoặc callback.</li>
+<li>Chỉ dùng lazy injection khi thực sự cần.</li>
+</ul>
+<h2 id="22-di-v%C3%A0-service-locator">22. DI và Service Locator</h2>
+<p>Service Locator:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">register</span><span class="hljs-params">()</span> {
+        <span class="hljs-type">EmailService</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span>
+                ServiceLocator.get(EmailService.class);
+
+        service.send(<span class="hljs-string">&quot;Đăng ký user&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>UserService tự tìm dependency từ một nơi toàn cục. Dependency bị ẩn trong method.</p>
+<p>Dependency Injection:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> MessageSender sender;
+
+    UserService(MessageSender sender) {
+        <span class="hljs-built_in">this</span>.sender = sender;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">register</span><span class="hljs-params">()</span> {
+        sender.send(<span class="hljs-string">&quot;Đăng ký user&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>Dependency được thể hiện rõ trong constructor và dễ thay thế khi test.</p>
+<h2 id="23-di-v%C3%A0-immutability">23. DI và Immutability</h2>
+<p>Constructor Injection cho phép field dependency là final:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">ReportService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ReportRepository repository;
+
+    ReportService(ReportRepository repository) {
+        <span class="hljs-built_in">this</span>.repository = repository;
+    }
+}
+</div></code></pre>
+<p>Sau khi object được tạo, repository không thể bị gán sang object khác.</p>
+<h2 id="24-khi-n%C3%A0o-n%C3%AAn-d%C3%B9ng-di">24. Khi nào nên dùng DI?</h2>
+<p>Nên dùng DI khi:</p>
+<ul>
+<li>Class phụ thuộc vào service hoặc repository khác.</li>
+<li>Muốn thay đổi implementation.</li>
+<li>Cần unit test độc lập.</li>
+<li>Ứng dụng có nhiều module.</li>
+<li>Dependency có vòng đời cần quản lý.</li>
+<li>Muốn giảm coupling.</li>
+<li>Cần cấu hình theo môi trường.</li>
+</ul>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div>Development → InMemoryRepository
+Testing     → FakeRepository
+Production  → MySqlRepository
+</div></code></pre>
+<h2 id="25-khi-n%C3%A0o-kh%C3%B4ng-c%E1%BA%A7n-di">25. Khi nào không cần DI?</h2>
+<p>Không cần tạo dependency thông qua container nếu object:</p>
+<ul>
+<li>Là class đơn giản, không có dependency.</li>
+<li>Là value object như Money, Point hoặc Address.</li>
+<li>Chỉ chứa hàm static thuần túy.</li>
+<li>Có vòng đời ngắn và không cần thay implementation.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">record</span> <span class="hljs-title class_">Point</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> {
+}
+</div></code></pre>
+<h2 id="26-%C4%91i%E1%BB%83m-ch%C3%ADnh">26. Điểm chính</h2>
+<ul>
+<li>Dependency là object mà một class cần sử dụng.</li>
+<li>DI cung cấp dependency từ bên ngoài class.</li>
+<li>IoC chuyển quyền kiểm soát tạo object ra bên ngoài.</li>
+<li>Constructor Injection thường là lựa chọn ưu tiên.</li>
+<li>Nên phụ thuộc vào interface thay vì implementation cụ thể.</li>
+<li>DI giúp giảm coupling và tăng khả năng kiểm thử.</li>
+<li>Spring IoC Container tự động tạo và inject bean.</li>
+<li>Composition Root là nơi kết nối các dependency.</li>
+<li>Dependency cycle thường cho thấy thiết kế cần được cải thiện.</li>
+</ul>
+<h2 id="27-th%E1%BB%B1c-h%C3%A0nh-t%E1%BB%91t">27. Thực hành tốt</h2>
+<ul>
+<li>Ưu tiên Constructor Injection.</li>
+<li>Khai báo dependency là final nếu có thể.</li>
+<li>Phụ thuộc vào abstraction.</li>
+<li>Nếu constructor quá nhiều tham số, xem lại trách nhiệm của class.</li>
+<li>Không tạo dependency bằng new bên trong class nghiệp vụ nếu muốn dễ thay thế.</li>
+<li>Không lạm dụng framework cho những object đơn giản.</li>
+<li>Tránh circular dependency.</li>
+<li>Tập trung wiring object tại Composition Root.</li>
+</ul>
+<h2 id="28-c%C3%A1c-l%E1%BB%97i-th%C6%B0%E1%BB%9Dng-g%E1%BA%B7p">28. Các lỗi thường gặp</h2>
+<table>
+<thead>
+<tr>
+<th>Lỗi</th>
+<th>Nguyên nhân</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NullPointerException</td>
+<td>Dependency chưa được inject</td>
+</tr>
+<tr>
+<td>UnsatisfiedDependencyException</td>
+<td>Container không tìm thấy bean phù hợp</td>
+</tr>
+<tr>
+<td>NoSuchBeanDefinitionException</td>
+<td>Chưa đăng ký implementation hoặc component</td>
+</tr>
+<tr>
+<td>NoUniqueBeanDefinitionException</td>
+<td>Có nhiều implementation nhưng chưa chọn bean</td>
+</tr>
+<tr>
+<td>Circular dependency</td>
+<td>Các bean phụ thuộc vòng lặp lẫn nhau</td>
+</tr>
+<tr>
+<td>Không test được class</td>
+<td>Class tự tạo dependency bằng new</td>
+</tr>
+<tr>
+<td>Dependency bị ẩn</td>
+<td>Dùng Service Locator hoặc Field Injection quá nhiều</td>
+</tr>
+<tr>
+<td>Constructor quá dài</td>
+<td>Class có quá nhiều trách nhiệm hoặc dependency</td>
+</tr>
+</tbody>
+</table>
+<h2 id="29-ghi-nh%E1%BB%9B">29. Ghi nhớ</h2>
+<pre class="hljs"><code><div>Dependency Injection:
+Class cần dependency
+        ↓
+Nhận dependency từ bên ngoài
+        ↓
+Sử dụng dependency qua abstraction
+</div></code></pre>
+<pre class="hljs"><code><div>Constructor Injection → dependency bắt buộc
+Setter Injection      → dependency tùy chọn hoặc có thể thay đổi
+Field Injection       → ngắn gọn nhưng khó test và khó kiểm soát
+</div></code></pre>
+<p>Ví dụ cơ bản:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">interface</span> <span class="hljs-title class_">PaymentGateway</span> {
+    <span class="hljs-type">void</span> <span class="hljs-title function_">pay</span><span class="hljs-params">(<span class="hljs-type">double</span> amount)</span>;
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PaymentGateway paymentGateway;
+
+    OrderService(PaymentGateway paymentGateway) {
+        <span class="hljs-built_in">this</span>.paymentGateway = paymentGateway;
+    }
+
+    <span class="hljs-type">void</span> <span class="hljs-title function_">checkout</span><span class="hljs-params">(<span class="hljs-type">double</span> amount)</span> {
+        paymentGateway.pay(amount);
+    }
+}
+</div></code></pre>
+<p>OrderService không tự tạo PaymentGateway. Dependency được cung cấp từ bên ngoài, nên có thể dùng nhiều implementation khác nhau.</p>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Java build artifacts
+*.class
+*.ser
+
+# Local/editor files
+.DS_Store
+.idea/
+*.iml
+

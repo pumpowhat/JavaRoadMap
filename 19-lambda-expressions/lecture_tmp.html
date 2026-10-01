@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-19-lambda-expressions-trong-java">Bài 19: Lambda Expressions trong Java</h1>
+<p>Lambda Expression là cú pháp ngắn gọn để biểu diễn một hàm không có tên. Lambda thường được dùng với Functional Interface, Collection và Stream API.</p>
+<h2 id="1-functional-interface">1. Functional Interface</h2>
+<p>Functional Interface là interface chỉ có đúng một abstract method.</p>
+<p>Có thể dùng annotation <code>@FunctionalInterface</code> để compiler kiểm tra.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@FunctionalInterface</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Calculator</span> {
+    <span class="hljs-type">int</span> <span class="hljs-title function_">calculate</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>;
+}
+</div></code></pre>
+<p>Interface này có thể được cài đặt bằng lambda:</p>
+<pre class="hljs"><code><div><span class="hljs-type">Calculator</span> <span class="hljs-variable">add</span> <span class="hljs-operator">=</span> (a, b) -&gt; a + b;
+
+System.out.println(add.calculate(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>)); <span class="hljs-comment">// 7</span>
+</div></code></pre>
+<h2 id="2-c%C3%BA-ph%C3%A1p-lambda-expression">2. Cú pháp Lambda Expression</h2>
+<p>Cú pháp tổng quát:</p>
+<pre class="hljs"><code><div>(tham số) -&gt; biểu thức hoặc khối lệnh
+</div></code></pre>
+<p>Các dạng thường gặp:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Không có tham số</span>
+() -&gt; System.out.println(<span class="hljs-string">&quot;Hello Java&quot;</span>);
+
+<span class="hljs-comment">// Một tham số</span>
+name -&gt; System.out.println(name);
+
+<span class="hljs-comment">// Nhiều tham số</span>
+(a, b) -&gt; a + b;
+
+<span class="hljs-comment">// Nhiều câu lệnh</span>
+(a, b) -&gt; {
+    <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> a + b;
+    <span class="hljs-keyword">return</span> result;
+};
+</div></code></pre>
+<p>Kiểu dữ liệu của tham số thường được Java tự suy luận:</p>
+<pre class="hljs"><code><div><span class="hljs-type">Calculator</span> <span class="hljs-variable">multiply</span> <span class="hljs-operator">=</span> (a, b) -&gt; a * b;
+</div></code></pre>
+<h2 id="3-c%C3%A1c-functional-interface-c%C3%B3-s%E1%BA%B5n">3. Các Functional Interface có sẵn</h2>
+<p>Các interface phổ biến nằm trong package <code>java.util.function</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Method chính</th>
+<th>Mục đích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Predicate&lt;T&gt;</code></td>
+<td><code>boolean test(T t)</code></td>
+<td>Kiểm tra điều kiện</td>
+</tr>
+<tr>
+<td><code>Consumer&lt;T&gt;</code></td>
+<td><code>void accept(T t)</code></td>
+<td>Nhận dữ liệu, không trả về</td>
+</tr>
+<tr>
+<td><code>Function&lt;T, R&gt;</code></td>
+<td><code>R apply(T t)</code></td>
+<td>Chuyển đổi dữ liệu</td>
+</tr>
+<tr>
+<td><code>Supplier&lt;T&gt;</code></td>
+<td><code>T get()</code></td>
+<td>Cung cấp dữ liệu</td>
+</tr>
+<tr>
+<td><code>UnaryOperator&lt;T&gt;</code></td>
+<td><code>T apply(T t)</code></td>
+<td>Nhận và trả về cùng kiểu</td>
+</tr>
+<tr>
+<td><code>BinaryOperator&lt;T&gt;</code></td>
+<td><code>T apply(T a, T b)</code></td>
+<td>Xử lý hai giá trị cùng kiểu</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-predicate">4. Predicate</h2>
+<p><code>Predicate&lt;T&gt;</code> nhận một giá trị và trả về <code>true</code> hoặc <code>false</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.function.Predicate;
+
+<span class="hljs-type">Predicate</span>&lt;Integer&gt; <span class="hljs-variable">isEven</span> <span class="hljs-operator">=</span> number -&gt; number % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>;
+
+System.out.println(isEven.test(<span class="hljs-number">4</span>)); <span class="hljs-comment">// true</span>
+System.out.println(isEven.test(<span class="hljs-number">5</span>)); <span class="hljs-comment">// false</span>
+</div></code></pre>
+<h2 id="5-consumer">5. Consumer</h2>
+<p><code>Consumer&lt;T&gt;</code> nhận một giá trị nhưng không trả về kết quả.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.function.Consumer;
+
+<span class="hljs-type">Consumer</span>&lt;String&gt; <span class="hljs-variable">printer</span> <span class="hljs-operator">=</span> text -&gt; System.out.println(text);
+
+printer.accept(<span class="hljs-string">&quot;Hello Lambda&quot;</span>);
+</div></code></pre>
+<h2 id="6-function">6. Function</h2>
+<p><code>Function&lt;T, R&gt;</code> nhận kiểu dữ liệu <code>T</code> và trả về kiểu dữ liệu <code>R</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.function.Function;
+
+<span class="hljs-type">Function</span>&lt;String, Integer&gt; <span class="hljs-variable">stringLength</span> <span class="hljs-operator">=</span> text -&gt; text.length();
+
+System.out.println(stringLength.apply(<span class="hljs-string">&quot;Java&quot;</span>)); <span class="hljs-comment">// 4</span>
+</div></code></pre>
+<h2 id="7-supplier">7. Supplier</h2>
+<p><code>Supplier&lt;T&gt;</code> không nhận tham số nhưng trả về một giá trị.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.function.Supplier;
+
+<span class="hljs-type">Supplier</span>&lt;String&gt; <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> () -&gt; <span class="hljs-string">&quot;Hello from Supplier&quot;</span>;
+
+System.out.println(message.get());
+</div></code></pre>
+<h2 id="8-lambda-v%E1%BB%9Bi-collection">8. Lambda với Collection</h2>
+<p>Lambda thường được dùng với <code>forEach</code> để duyệt collection.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">List</span>&lt;String&gt; <span class="hljs-variable">names</span> <span class="hljs-operator">=</span> List.of(<span class="hljs-string">&quot;An&quot;</span>, <span class="hljs-string">&quot;Binh&quot;</span>, <span class="hljs-string">&quot;Chi&quot;</span>);
+
+names.forEach(name -&gt; System.out.println(name));
+</div></code></pre>
+<h2 id="9-lambda-v%E1%BB%9Bi-comparator">9. Lambda với Comparator</h2>
+<p>Sắp xếp danh sách theo độ dài chuỗi:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.Comparator;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">List</span>&lt;String&gt; <span class="hljs-variable">names</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(List.of(<span class="hljs-string">&quot;Java&quot;</span>, <span class="hljs-string">&quot;SQL&quot;</span>, <span class="hljs-string">&quot;Lambda&quot;</span>));
+
+names.sort((first, second) -&gt; first.length() - second.length());
+
+System.out.println(names); <span class="hljs-comment">// [SQL, Java, Lambda]</span>
+</div></code></pre>
+<p>Có thể viết dễ đọc hơn:</p>
+<pre class="hljs"><code><div>names.sort(Comparator.comparing(String::length));
+</div></code></pre>
+<h2 id="10-lambda-v%E1%BB%9Bi-stream-api">10. Lambda với Stream API</h2>
+<p>Lambda là thành phần quan trọng của Stream API.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">List</span>&lt;Integer&gt; <span class="hljs-variable">numbers</span> <span class="hljs-operator">=</span> List.of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>);
+
+numbers.stream()
+       .filter(number -&gt; number % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+       .map(number -&gt; number * <span class="hljs-number">2</span>)
+       .forEach(System.out::println);
+</div></code></pre>
+<p>Kết quả:</p>
+<pre class="hljs"><code><div>4
+8
+12
+</div></code></pre>
+<p>Ý nghĩa:</p>
+<ul>
+<li><code>filter</code>: lọc dữ liệu theo điều kiện.</li>
+<li><code>map</code>: biến đổi từng phần tử.</li>
+<li><code>forEach</code>: thực hiện hành động với từng phần tử.</li>
+</ul>
+<h2 id="11-method-reference">11. Method Reference</h2>
+<p>Method reference là cú pháp rút gọn của lambda khi lambda chỉ gọi một method có sẵn.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Lambda</span>
+names.forEach(name -&gt; System.out.println(name));
+
+<span class="hljs-comment">// Method reference</span>
+names.forEach(System.out::println);
+</div></code></pre>
+<p>Các dạng phổ biến:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Static method</span>
+Integer::parseInt
+
+<span class="hljs-comment">// Instance method của object cụ thể</span>
+System.out::println
+
+<span class="hljs-comment">// Instance method của một kiểu dữ liệu</span>
+String::toUpperCase
+
+<span class="hljs-comment">// Constructor reference</span>
+ArrayList::<span class="hljs-keyword">new</span>
+</div></code></pre>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div><span class="hljs-type">Function</span>&lt;String, String&gt; <span class="hljs-variable">upperCase</span> <span class="hljs-operator">=</span> String::toUpperCase;
+
+System.out.println(upperCase.apply(<span class="hljs-string">&quot;java&quot;</span>)); <span class="hljs-comment">// JAVA</span>
+</div></code></pre>
+<h2 id="12-lambda-truy-c%E1%BA%ADp-bi%E1%BA%BFn-b%C3%AAn-ngo%C3%A0i">12. Lambda truy cập biến bên ngoài</h2>
+<p>Lambda có thể truy cập local variable nếu biến đó là <code>final</code> hoặc effectively final.</p>
+<pre class="hljs"><code><div><span class="hljs-type">int</span> <span class="hljs-variable">multiplier</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+
+<span class="hljs-type">Function</span>&lt;Integer, Integer&gt; <span class="hljs-variable">doubleNumber</span> <span class="hljs-operator">=</span>
+        number -&gt; number * multiplier;
+
+System.out.println(doubleNumber.apply(<span class="hljs-number">5</span>)); <span class="hljs-comment">// 10</span>
+</div></code></pre>
+<p>Không được thay đổi giá trị biến sau khi lambda sử dụng biến đó:</p>
+<pre class="hljs"><code><div><span class="hljs-type">int</span> <span class="hljs-variable">multiplier</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+<span class="hljs-type">Function</span>&lt;Integer, Integer&gt; <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> number -&gt; number * multiplier;
+
+<span class="hljs-comment">// multiplier = 3; // Lỗi</span>
+</div></code></pre>
+<h2 id="13-lambda-v%C3%A0-this">13. Lambda và <code>this</code></h2>
+<p>Trong lambda, <code>this</code> tham chiếu đến object bên ngoài.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">Printer</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span>;
+
+    <span class="hljs-type">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">()</span> {
+        <span class="hljs-type">Runnable</span> <span class="hljs-variable">task</span> <span class="hljs-operator">=</span> () -&gt; System.out.println(<span class="hljs-built_in">this</span>.message);
+        task.run();
+    }
+}
+</div></code></pre>
+<h2 id="14-lambda-v%C3%A0-anonymous-class">14. Lambda và Anonymous Class</h2>
+<p>Anonymous class:</p>
+<pre class="hljs"><code><div><span class="hljs-type">Runnable</span> <span class="hljs-variable">task</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;Running&quot;</span>);
+    }
+};
+</div></code></pre>
+<p>Lambda:</p>
+<pre class="hljs"><code><div><span class="hljs-type">Runnable</span> <span class="hljs-variable">task</span> <span class="hljs-operator">=</span> () -&gt; System.out.println(<span class="hljs-string">&quot;Running&quot;</span>);
+</div></code></pre>
+<p>Lambda chỉ dùng được với Functional Interface. Anonymous class có thể dùng với interface có nhiều method hoặc class abstract.</p>
+<h2 id="15-%C4%91i%E1%BB%83m-ch%C3%ADnh">15. Điểm chính</h2>
+<ul>
+<li>Lambda là hàm không có tên, giúp viết code ngắn gọn hơn.</li>
+<li>Lambda cần một Functional Interface làm kiểu đích.</li>
+<li>Functional Interface chỉ có một abstract method.</li>
+<li><code>Predicate</code> dùng để kiểm tra điều kiện.</li>
+<li><code>Consumer</code> nhận dữ liệu nhưng không trả về.</li>
+<li><code>Function</code> chuyển đổi dữ liệu.</li>
+<li><code>Supplier</code> cung cấp dữ liệu.</li>
+<li>Lambda thường kết hợp với Collection và Stream API.</li>
+<li>Method reference là cách viết rút gọn của một số lambda.</li>
+</ul>
+<h2 id="16-th%E1%BB%B1c-h%C3%A0nh-t%E1%BB%91t">16. Thực hành tốt</h2>
+<ul>
+<li>Dùng <code>@FunctionalInterface</code> khi tự định nghĩa Functional Interface.</li>
+<li>Đặt tên lambda rõ ràng khi logic phức tạp.</li>
+<li>Không viết lambda quá dài; nên tách thành method riêng.</li>
+<li>Dùng method reference khi nó giúp code dễ đọc hơn.</li>
+<li>Tránh thay đổi state bên ngoài lambda.</li>
+<li>Dùng <code>Comparator.comparing</code> thay cho phép trừ khi so sánh số để tránh lỗi tràn số.</li>
+</ul>
+<h2 id="17-c%C3%A1c-l%E1%BB%97i-th%C6%B0%E1%BB%9Dng-g%E1%BA%B7p">17. Các lỗi thường gặp</h2>
+<table>
+<thead>
+<tr>
+<th>Lỗi</th>
+<th>Nguyên nhân</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Target type of a lambda conversion must be an interface</code></td>
+<td>Lambda không được gán cho class thông thường</td>
+</tr>
+<tr>
+<td><code>Multiple non-overriding abstract methods</code></td>
+<td>Interface có nhiều abstract method</td>
+</tr>
+<tr>
+<td><code>Local variable must be final or effectively final</code></td>
+<td>Lambda truy cập biến local đã bị thay đổi</td>
+</tr>
+<tr>
+<td>Không suy luận được kiểu tham số</td>
+<td>Thiếu kiểu đích hoặc lambda không rõ kiểu</td>
+</tr>
+<tr>
+<td>Lambda quá dài và khó đọc</td>
+<td>Đưa quá nhiều logic vào một biểu thức</td>
+</tr>
+</tbody>
+</table>
+<h2 id="18-ghi-nh%E1%BB%9B">18. Ghi nhớ</h2>
+<pre class="hljs"><code><div>Lambda = (tham số) -&gt; biểu thức hoặc khối lệnh
+</div></code></pre>
+<pre class="hljs"><code><div>Functional Interface + Lambda
+→ triển khai hành vi ngắn gọn
+</div></code></pre>
+<p>Ví dụ tổng quát:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@FunctionalInterface</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Operation</span> {
+    <span class="hljs-type">int</span> <span class="hljs-title function_">execute</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>;
+}
+
+<span class="hljs-type">Operation</span> <span class="hljs-variable">multiply</span> <span class="hljs-operator">=</span> (a, b) -&gt; a * b;
+
+System.out.println(multiply.execute(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>)); <span class="hljs-comment">// 12</span>
+</div></code></pre>
+
+</body>
+</html>

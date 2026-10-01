@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-21-modules-trong-java">Bài 21: Modules trong Java</h1>
+<p>Module là cơ chế đóng gói và quản lý các package được giới thiệu từ Java 9. Module giúp kiểm soát package nào được public, module nào được phép sử dụng dependency nào và giảm sự phụ thuộc không cần thiết giữa các phần của ứng dụng.</p>
+<p>Java Module System còn được gọi là JPMS (Java Platform Module System).</p>
+<h2 id="1-v%E1%BA%A5n-%C4%91%E1%BB%81-tr%C6%B0%E1%BB%9Bc-khi-c%C3%B3-module">1. Vấn đề trước khi có Module</h2>
+<p>Trước Java 9, ứng dụng Java chủ yếu được tổ chức bằng package và JAR.</p>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div>application.jar
+    com.example.service
+    com.example.repository
+    com.example.model
+</div></code></pre>
+<p>Cách tổ chức này có một số hạn chế:</p>
+<ul>
+<li>Mọi public class trong JAR đều có thể được module khác sử dụng.</li>
+<li>Khó kiểm soát dependency giữa các package.</li>
+<li>Có thể xảy ra tình trạng dependency bị thiếu hoặc xung đột phiên bản.</li>
+<li>Package nội bộ cũng có thể bị truy cập nếu class được khai báo public.</li>
+<li>Classpath không kiểm tra dependency một cách chặt chẽ.</li>
+</ul>
+<p>Module giúp giải quyết các vấn đề này bằng cách khai báo rõ ràng ranh giới và dependency.</p>
+<h2 id="2-module-l%C3%A0-g%C3%AC">2. Module là gì?</h2>
+<p>Module là một nhóm package có:</p>
+<ul>
+<li>Tên duy nhất.</li>
+<li>Danh sách module phụ thuộc.</li>
+<li>Danh sách package được phép public ra bên ngoài.</li>
+<li>Có thể cung cấp hoặc sử dụng service.</li>
+</ul>
+<p>Module được khai báo trong file đặc biệt:</p>
+<pre class="hljs"><code><div>module-info.java
+</div></code></pre>
+<p>Một module có thể chứa nhiều package:</p>
+<pre class="hljs"><code><div>my.app
+├── module-info.java
+└── com.example.app
+    ├── Main.java
+    └── User.java
+</div></code></pre>
+<h2 id="3-c%E1%BA%A5u-tr%C3%BAc-module-infojava">3. Cấu trúc module-info.java</h2>
+<p>Cấu trúc cơ bản:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> java.sql;
+    <span class="hljs-keyword">exports</span> com.example.app.api;
+}
+</div></code></pre>
+<p>Ý nghĩa:</p>
+<ul>
+<li>module com.example.app: khai báo tên module.</li>
+<li>requires java.sql: module này sử dụng module java.sql.</li>
+<li>exports com.example.app.api: public package được phép cho module khác sử dụng.</li>
+</ul>
+<h2 id="4-t%E1%BA%A1o-module-%C4%91%C6%A1n-gi%E1%BA%A3n">4. Tạo module đơn giản</h2>
+<p>Cấu trúc thư mục:</p>
+<pre class="hljs"><code><div>src
+├── com.example.app
+│   ├── module-info.java
+│   └── com
+│       └── example
+│           └── app
+│               └── Main.java
+</div></code></pre>
+<p>File module-info.java:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+}
+</div></code></pre>
+<p>File Main.java:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        System.out.println(<span class="hljs-string">&quot;Hello Module&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>Biên dịch:</p>
+<pre class="hljs"><code><div>javac -d out --module-source-path src -m com.example.app
+</div></code></pre>
+<p>Chạy:</p>
+<pre class="hljs"><code><div>java --module-path out -m com.example.app/com.example.app.Main
+</div></code></pre>
+<p>Trong đó:</p>
+<ul>
+<li>-d out: đặt file .class vào thư mục out.</li>
+<li>--module-source-path src: chỉ định thư mục chứa source module.</li>
+<li>-m com.example.app: biên dịch module com.example.app.</li>
+<li>--module-path out: chỉ định nơi tìm module đã biên dịch.</li>
+<li>com.example.app/com.example.app.Main: tên module và class main.</li>
+</ul>
+<h2 id="5-requires">5. requires</h2>
+<p>requires khai báo module hiện tại phụ thuộc vào module khác.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> java.sql;
+}
+</div></code></pre>
+<p>Ví dụ dùng JDBC:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+
+<span class="hljs-keyword">import</span> java.sql.Connection;
+<span class="hljs-keyword">import</span> java.sql.DriverManager;
+<span class="hljs-keyword">import</span> java.sql.SQLException;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DatabaseConnection</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Connection</span> <span class="hljs-title function_">connect</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException {
+        <span class="hljs-keyword">return</span> DriverManager.getConnection(
+                <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/test&quot;</span>,
+                <span class="hljs-string">&quot;root&quot;</span>,
+                <span class="hljs-string">&quot;password&quot;</span>
+        );
+    }
+}
+</div></code></pre>
+<p>Module cần có:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> java.sql;
+}
+</div></code></pre>
+<p>Nếu thiếu requires java.sql, compiler có thể báo lỗi vì module không đọc được package java.sql.</p>
+<h2 id="6-exports">6. exports</h2>
+<p>exports cho phép module khác truy cập các public type trong package.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.model {
+    <span class="hljs-keyword">exports</span> com.example.model.api;
+}
+</div></code></pre>
+<p>Giả sử package có class:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.model.api;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name;
+
+    <span class="hljs-type">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(String name)</span> {
+        <span class="hljs-built_in">this</span>.name = name;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-type">String</span> <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> name;
+    }
+}
+</div></code></pre>
+<p>Module khác có thể import class này:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> com.example.model.api.User;
+</div></code></pre>
+<p>Chỉ package được exports mới được public ra ngoài module.</p>
+<h2 id="7-package-kh%C3%B4ng-%C4%91%C6%B0%E1%BB%A3c-exports">7. Package không được exports</h2>
+<p>Package không được exports vẫn có thể chứa public class, nhưng module khác không được truy cập trực tiếp.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.model {
+    <span class="hljs-keyword">exports</span> com.example.model.api;
+}
+</div></code></pre>
+<p>Trong ví dụ trên:</p>
+<pre class="hljs"><code><div>com.example.model.api      → module khác được phép truy cập
+com.example.model.internal  → chỉ dùng bên trong module
+</div></code></pre>
+<p>Đây là điểm khác biệt quan trọng giữa public class và package được exports.</p>
+<h2 id="8-requires-transitive">8. requires transitive</h2>
+<p>requires transitive truyền dependency sang module phụ thuộc.</p>
+<p>Module A:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.api {
+    <span class="hljs-keyword">requires</span> transitive com.example.model;
+    <span class="hljs-keyword">exports</span> com.example.api;
+}
+</div></code></pre>
+<p>Module B sử dụng module A:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> com.example.api;
+}
+</div></code></pre>
+<p>Nhờ requires transitive, module B cũng có thể đọc module com.example.model mà không cần khai báo trực tiếp requires com.example.model.</p>
+<p>Chỉ nên dùng requires transitive khi dependency đó thực sự xuất hiện trong API public của module.</p>
+<h2 id="9-requires-static">9. requires static</h2>
+<p>requires static khai báo dependency chỉ cần khi biên dịch, không bắt buộc lúc chạy.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> <span class="hljs-keyword">static</span> lombok;
+}
+</div></code></pre>
+<p>Điều này thường dùng với:</p>
+<ul>
+<li>Annotation processor.</li>
+<li>Thư viện chỉ cần lúc compile.</li>
+<li>Dependency tùy chọn.</li>
+</ul>
+<p>Nếu code thực sự cần class của module đó lúc runtime, không nên dùng requires static.</p>
+<h2 id="10-opens">10. opens</h2>
+<p>exports dùng cho việc truy cập trực tiếp các public type.</p>
+<p>opens dùng để cho phép Reflection truy cập các thành phần bên trong package, kể cả private field hoặc private method trong một số trường hợp.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.model {
+    opens com.example.model.entity;
+}
+</div></code></pre>
+<p>Ví dụ framework có thể cần Reflection để đọc field:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+    <span class="hljs-keyword">private</span> String name;
+}
+</div></code></pre>
+<p>Có thể mở package cho riêng một module:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.model {
+    opens com.example.model.entity to com.example.framework;
+}
+</div></code></pre>
+<h2 id="11-open-module">11. open module</h2>
+<p>Có thể mở toàn bộ package trong module cho Reflection:</p>
+<pre class="hljs"><code><div>open <span class="hljs-keyword">module</span> com.example.model {
+    <span class="hljs-keyword">exports</span> com.example.model.api;
+}
+</div></code></pre>
+<p>open module không đồng nghĩa với exports.</p>
+<ul>
+<li>exports: cho phép module khác truy cập trực tiếp package.</li>
+<li>opens: cho phép Reflection truy cập package.</li>
+<li>open module: mở tất cả package cho Reflection.</li>
+</ul>
+<p>Không nên dùng open module nếu chỉ cần mở một vài package.</p>
+<h2 id="12-exports-v%C3%A0-opens-kh%C3%A1c-nhau">12. exports và opens khác nhau</h2>
+<table>
+<thead>
+<tr>
+<th>Khai báo</th>
+<th>Mục đích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exports</td>
+<td>Cho phép truy cập trực tiếp các public type</td>
+</tr>
+<tr>
+<td>opens</td>
+<td>Cho phép Reflection truy cập</td>
+</tr>
+<tr>
+<td>open module</td>
+<td>Mở toàn bộ package cho Reflection</td>
+</tr>
+<tr>
+<td>exports ... to</td>
+<td>Chỉ export cho module cụ thể</td>
+</tr>
+<tr>
+<td>opens ... to</td>
+<td>Chỉ mở cho module cụ thể</td>
+</tr>
+</tbody>
+</table>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.model {
+    <span class="hljs-keyword">exports</span> com.example.model.api;
+    opens com.example.model.entity to com.example.orm;
+}
+</div></code></pre>
+<h2 id="13-module-ph%E1%BB%A5-thu%E1%BB%99c-l%E1%BA%ABn-nhau">13. Module phụ thuộc lẫn nhau</h2>
+<p>Ví dụ có hai module:</p>
+<pre class="hljs"><code><div>com.example.model
+com.example.app
+</div></code></pre>
+<p>Module model:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.model {
+    <span class="hljs-keyword">exports</span> com.example.model.api;
+}
+</div></code></pre>
+<p>Module app:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> com.example.model;
+}
+</div></code></pre>
+<p>Class trong app:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+
+<span class="hljs-keyword">import</span> com.example.model.api.User;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;An&quot;</span>);
+        System.out.println(user.getName());
+    }
+}
+</div></code></pre>
+<h2 id="14-module-graph">14. Module Graph</h2>
+<p>Các module tạo thành một đồ thị dependency.</p>
+<pre class="hljs"><code><div>com.example.app
+        |
+        | requires
+        v
+com.example.service
+        |
+        | requires
+        v
+com.example.model
+</div></code></pre>
+<p>Module system kiểm tra:</p>
+<ul>
+<li>Module có tồn tại không.</li>
+<li>Dependency có bị thiếu không.</li>
+<li>Có module bị trùng tên không.</li>
+<li>Package có bị split giữa nhiều module không.</li>
+<li>Module có quyền đọc module khác không.</li>
+</ul>
+<h2 id="15-named-module-v%C3%A0-unnamed-module">15. Named Module và Unnamed Module</h2>
+<h3 id="named-module">Named Module</h3>
+<p>Module có file module-info.java.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+}
+</div></code></pre>
+<p>Đây là named module.</p>
+<h3 id="unnamed-module">Unnamed Module</h3>
+<p>Code chạy trên classpath, không có module-info.java, thuộc về unnamed module.</p>
+<pre class="hljs"><code><div>java -<span class="hljs-built_in">cp</span> out com.example.Main
+</div></code></pre>
+<p>Unnamed module:</p>
+<ul>
+<li>Có thể đọc các module trong hệ thống.</li>
+<li>Không khai báo dependency bằng requires.</li>
+<li>Thường được dùng bởi các project cũ chưa chuyển sang module.</li>
+</ul>
+<h2 id="16-automatic-module">16. Automatic Module</h2>
+<p>Một JAR không có module-info.java nhưng được đặt trên module path có thể trở thành automatic module.</p>
+<p>Tên module có thể được suy ra từ tên file JAR hoặc được khai báo trong MANIFEST.MF.</p>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div>library-utils-1.0.jar
+</div></code></pre>
+<p>Có thể được suy ra thành tên module gần giống:</p>
+<pre class="hljs"><code><div>library.utils
+</div></code></pre>
+<p>Automatic module:</p>
+<ul>
+<li>Có tên module.</li>
+<li>Có thể được module khác requires.</li>
+<li>Thường exports tất cả package.</li>
+<li>Là bước chuyển tiếp khi thư viện chưa hỗ trợ JPMS đầy đủ.</li>
+</ul>
+<h2 id="17-module-c%E1%BB%A7a-java-platform">17. Module của Java Platform</h2>
+<p>JDK hiện đại cũng được chia thành nhiều module.</p>
+<p>Một số module phổ biến:</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>java.base</td>
+<td>Class cơ bản, tự động được yêu cầu</td>
+</tr>
+<tr>
+<td>java.sql</td>
+<td>JDBC và SQL API</td>
+</tr>
+<tr>
+<td>java.desktop</td>
+<td>AWT, Swing</td>
+</tr>
+<tr>
+<td>java.net.http</td>
+<td>HTTP Client</td>
+</tr>
+<tr>
+<td>java.logging</td>
+<td>Logging API</td>
+</tr>
+<tr>
+<td>java.xml</td>
+<td>XML API</td>
+</tr>
+<tr>
+<td>jdk.httpserver</td>
+<td>HTTP Server đơn giản</td>
+</tr>
+</tbody>
+</table>
+<p>Module java.base luôn được tự động requires, không cần khai báo:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-comment">// Không cần viết requires java.base;</span>
+}
+</div></code></pre>
+<h2 id="18-service-provider-trong-module">18. Service Provider trong Module</h2>
+<p>Module system hỗ trợ mô hình service provider.</p>
+<p>Có ba thành phần:</p>
+<ul>
+<li>Service interface.</li>
+<li>Service provider.</li>
+<li>Service consumer.</li>
+</ul>
+<h3 id="service-interface">Service interface</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.service.api;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">GreetingService</span> {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">greet</span><span class="hljs-params">(String name)</span>;
+}
+</div></code></pre>
+<h3 id="module-cung-c%E1%BA%A5p-service">Module cung cấp service</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.greeting.provider {
+    <span class="hljs-keyword">requires</span> com.example.service.api;
+    provides com.example.service.api.GreetingService
+        with com.example.greeting.provider.VietnameseGreetingService;
+}
+</div></code></pre>
+<p>Class provider:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.greeting.provider;
+
+<span class="hljs-keyword">import</span> com.example.service.api.GreetingService;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VietnameseGreetingService</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">GreetingService</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">String</span> <span class="hljs-title function_">greet</span><span class="hljs-params">(String name)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Xin chào &quot;</span> + name;
+    }
+}
+</div></code></pre>
+<h3 id="module-s%E1%BB%AD-d%E1%BB%A5ng-service">Module sử dụng service</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> com.example.service.api;
+    uses com.example.service.api.GreetingService;
+}
+</div></code></pre>
+<p>Đọc service bằng ServiceLoader:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.util.ServiceLoader;
+<span class="hljs-keyword">import</span> com.example.service.api.GreetingService;
+
+<span class="hljs-type">ServiceLoader</span>&lt;GreetingService&gt; <span class="hljs-variable">services</span> <span class="hljs-operator">=</span>
+        ServiceLoader.load(GreetingService.class);
+
+<span class="hljs-keyword">for</span> (GreetingService service : services) {
+    System.out.println(service.greet(<span class="hljs-string">&quot;An&quot;</span>));
+}
+</div></code></pre>
+<h2 id="19-module-infojava-v%C3%A0-main-class">19. module-info.java và main class</h2>
+<p>module-info.java chỉ khai báo cấu hình module, không chứa class thông thường.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">exports</span> com.example.app.api;
+}
+</div></code></pre>
+<p>Main class vẫn nằm trong package riêng:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        System.out.println(<span class="hljs-string">&quot;Application started&quot;</span>);
+    }
+}
+</div></code></pre>
+<h2 id="20-ki%E1%BB%83m-tra-module-b%E1%BA%B1ng-c%C3%B4ng-c%E1%BB%A5-jdk">20. Kiểm tra module bằng công cụ JDK</h2>
+<p>Xem module của JDK:</p>
+<pre class="hljs"><code><div>java --list-modules
+</div></code></pre>
+<p>Xem module descriptor của file JAR:</p>
+<pre class="hljs"><code><div>jar --describe-module --file library.jar
+</div></code></pre>
+<p>Xem dependency của module:</p>
+<pre class="hljs"><code><div>jdeps --module-path out -s out/com.example.app
+</div></code></pre>
+<h2 id="21-%C4%91i%E1%BB%83m-ch%C3%ADnh">21. Điểm chính</h2>
+<ul>
+<li>Module là nhóm package có tên và descriptor riêng.</li>
+<li>module-info.java là file khai báo module.</li>
+<li>requires khai báo dependency.</li>
+<li>exports công khai package cho module khác.</li>
+<li>opens cho phép Reflection truy cập package.</li>
+<li>uses và provides hỗ trợ ServiceLoader.</li>
+<li>Module path dùng để tìm module.</li>
+<li>Classpath và module path là hai cơ chế khác nhau.</li>
+<li>java.base được tự động yêu cầu.</li>
+<li>Module system kiểm tra dependency và quyền truy cập rõ ràng hơn classpath.</li>
+</ul>
+<h2 id="22-th%E1%BB%B1c-h%C3%A0nh-t%E1%BB%91t">22. Thực hành tốt</h2>
+<ul>
+<li>Đặt tên module ổn định, thường dùng dạng tên package đảo ngược.</li>
+<li>Chỉ exports các package thật sự cần public.</li>
+<li>Giữ package implementation ở dạng internal, không exports.</li>
+<li>Chỉ dùng opens cho package cần Reflection.</li>
+<li>Không dùng open module nếu chỉ cần mở một package.</li>
+<li>Khai báo dependency trực tiếp thay vì phụ thuộc ngầm.</li>
+<li>Dùng requires transitive khi dependency xuất hiện trong API public.</li>
+<li>Kiểm tra module path và classpath khi chạy ứng dụng.</li>
+<li>Di chuyển từng phần của project cũ sang module để dễ kiểm soát.</li>
+</ul>
+<h2 id="23-c%C3%A1c-l%E1%BB%97i-th%C6%B0%E1%BB%9Dng-g%E1%BA%B7p">23. Các lỗi thường gặp</h2>
+<table>
+<thead>
+<tr>
+<th>Lỗi</th>
+<th>Nguyên nhân</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>package is not visible</td>
+<td>Package chưa được module khác exports hoặc module chưa requires</td>
+</tr>
+<tr>
+<td>module not found</td>
+<td>Thiếu module trên module path</td>
+</tr>
+<tr>
+<td>package exists in another module</td>
+<td>Split package giữa nhiều module</td>
+</tr>
+<tr>
+<td>class not found khi chạy</td>
+<td>Sai module path hoặc sai tên main class</td>
+</tr>
+<tr>
+<td>Reflection access lỗi</td>
+<td>Chưa opens package cho module cần Reflection</td>
+</tr>
+<tr>
+<td>package is declared in module but module does not read it</td>
+<td>Thiếu requires</td>
+</tr>
+<tr>
+<td>Tên module không hợp lệ</td>
+<td>Tên chứa ký tự không phù hợp hoặc trùng module khác</td>
+</tr>
+</tbody>
+</table>
+<h2 id="24-ghi-nh%E1%BB%9B">24. Ghi nhớ</h2>
+<pre class="hljs"><code><div>module-info.java = mô tả module
+requires         = module này cần module nào?
+exports          = công khai package nào?
+opens            = cho phép Reflection vào package nào?
+uses             = sử dụng service nào?
+provides         = cung cấp implementation nào?
+</div></code></pre>
+<p>Ví dụ đầy đủ tối thiểu:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">module</span> com.example.app {
+    <span class="hljs-keyword">requires</span> java.sql;
+    <span class="hljs-keyword">exports</span> com.example.app.api;
+}
+</div></code></pre>
+<p>Cấu trúc thư mục:</p>
+<pre class="hljs"><code><div>src
+└── com.example.app
+    ├── module-info.java
+    └── com
+        └── example
+            └── app
+                ├── Main.java
+                └── api
+                    └── User.java
+</div></code></pre>
+
+</body>
+</html>

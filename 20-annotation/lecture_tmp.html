@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lecture.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="b%C3%A0i-20-annotation-trong-java">Bài 20: Annotation trong Java</h1>
+<p>Annotation là metadata dùng để cung cấp thông tin bổ sung cho class, method, field, parameter hoặc các thành phần khác trong chương trình Java.</p>
+<p>Annotation không trực tiếp thay đổi dữ liệu của object, nhưng có thể được compiler, JVM hoặc framework đọc để kiểm tra và thực hiện hành vi tương ứng.</p>
+<h2 id="1-annotation-l%C3%A0-g%C3%AC">1. Annotation là gì?</h2>
+<p>Annotation bắt đầu bằng ký hiệu @.</p>
+<p>Một số annotation quen thuộc:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-meta">@Deprecated</span>
+<span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span>
+</div></code></pre>
+<p>Ví dụ:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> {
+    <span class="hljs-type">void</span> <span class="hljs-title function_">sound</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;Animal sound&quot;</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Animal</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-type">void</span> <span class="hljs-title function_">sound</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;Dog barks&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>@Override thông báo cho compiler rằng method sound đang ghi đè method của class cha.</p>
+<h2 id="2-vai-tr%C3%B2-c%E1%BB%A7a-annotation">2. Vai trò của Annotation</h2>
+<p>Annotation thường được dùng để:</p>
+<ul>
+<li>Cung cấp thông tin cho compiler.</li>
+<li>Kiểm tra code trong quá trình biên dịch.</li>
+<li>Cấu hình hành vi cho framework.</li>
+<li>Đánh dấu class hoặc method.</li>
+<li>Đọc metadata bằng Reflection.</li>
+<li>Sinh code tự động thông qua annotation processor.</li>
+</ul>
+<h2 id="3-c%C3%A1c-annotation-c%C3%B3-s%E1%BA%B5n">3. Các annotation có sẵn</h2>
+<h3 id="override">@Override</h3>
+<p>Kiểm tra method có thực sự override method của superclass hoặc interface hay không.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">Parent</span> {
+    <span class="hljs-type">void</span> <span class="hljs-title function_">display</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;Parent&quot;</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Parent</span> {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-type">void</span> <span class="hljs-title function_">display</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;Child&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>Nếu viết sai tên method, compiler sẽ báo lỗi vì không có method phù hợp để override.</p>
+<h3 id="deprecated">@Deprecated</h3>
+<p>Đánh dấu thành phần không nên tiếp tục sử dụng.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">OldApi</span> {
+    <span class="hljs-meta">@Deprecated</span>
+    <span class="hljs-type">void</span> <span class="hljs-title function_">oldMethod</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;API cũ&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>Có thể cung cấp lý do và phiên bản thay thế:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@deprecated</span> Dùng newMethod() thay thế.
+ */</span>
+<span class="hljs-meta">@Deprecated(since = &quot;2.0&quot;, forRemoval = true)</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">oldMethod</span><span class="hljs-params">()</span> {
+}
+</div></code></pre>
+<h3 id="suppresswarnings">@SuppressWarnings</h3>
+<p>Tắt một số cảnh báo của compiler.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">process</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Code có cảnh báo unchecked</span>
+}
+</div></code></pre>
+<p>Không nên lạm dụng annotation này vì có thể che giấu lỗi thật.</p>
+<h3 id="functionalinterface">@FunctionalInterface</h3>
+<p>Đảm bảo interface chỉ có một abstract method.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@FunctionalInterface</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Calculator</span> {
+    <span class="hljs-type">int</span> <span class="hljs-title function_">calculate</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>;
+}
+</div></code></pre>
+<p>Nếu thêm abstract method thứ hai, compiler sẽ báo lỗi.</p>
+<h2 id="4-t%E1%BA%A1o-custom-annotation">4. Tạo Custom Annotation</h2>
+<p>Dùng từ khóa @interface để tạo annotation riêng.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@interface</span> Author {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">name</span><span class="hljs-params">()</span>;
+}
+</div></code></pre>
+<p>Sử dụng:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Author(name = &quot;Nguyen Van An&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+<p>Một annotation có thể có nhiều thuộc tính:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@interface</span> Info {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">author</span><span class="hljs-params">()</span>;
+    <span class="hljs-type">int</span> <span class="hljs-title function_">version</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-number">1</span>;
+    <span class="hljs-type">String</span> <span class="hljs-title function_">description</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-string">&quot;&quot;</span>;
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">@Info(
+    author = &quot;An&quot;,
+    version = 2,
+    description = &quot;Class quản lý sinh viên&quot;
+)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">StudentService</span> {
+}
+</div></code></pre>
+<h2 id="5-annotation-element">5. Annotation Element</h2>
+<p>Các kiểu dữ liệu thường được phép dùng làm giá trị annotation:</p>
+<ul>
+<li>Kiểu nguyên thủy như int, boolean, double.</li>
+<li>String.</li>
+<li>Class.</li>
+<li>enum.</li>
+<li>Annotation khác.</li>
+<li>Mảng của các kiểu trên.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Role</span> {
+    ADMIN,
+    USER
+}
+
+<span class="hljs-meta">@interface</span> UserConfig {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">username</span><span class="hljs-params">()</span>;
+    <span class="hljs-type">Role</span> <span class="hljs-title function_">role</span><span class="hljs-params">()</span>;
+    <span class="hljs-type">boolean</span> <span class="hljs-title function_">active</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-type">String</span>[] <span class="hljs-title function_">permissions</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> {};
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">@UserConfig(
+    username = &quot;an&quot;,
+    role = Role.ADMIN,
+    permissions = {&quot;READ&quot;, &quot;WRITE&quot;}
+)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+}
+</div></code></pre>
+<h2 id="6-target">6. @Target</h2>
+<p>@Target quy định annotation được phép đặt ở đâu.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.annotation.ElementType;
+<span class="hljs-keyword">import</span> java.lang.annotation.Target;
+
+<span class="hljs-meta">@Target(ElementType.TYPE)</span>
+<span class="hljs-meta">@interface</span> Entity {
+}
+</div></code></pre>
+<p>Annotation trên chỉ được dùng cho class, interface, enum hoặc record.</p>
+<p>Các giá trị thường gặp:</p>
+<table>
+<thead>
+<tr>
+<th>ElementType</th>
+<th>Vị trí sử dụng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TYPE</td>
+<td>Class, interface, enum, record</td>
+</tr>
+<tr>
+<td>METHOD</td>
+<td>Method</td>
+</tr>
+<tr>
+<td>FIELD</td>
+<td>Field</td>
+</tr>
+<tr>
+<td>PARAMETER</td>
+<td>Parameter</td>
+</tr>
+<tr>
+<td>CONSTRUCTOR</td>
+<td>Constructor</td>
+</tr>
+<tr>
+<td>LOCAL_VARIABLE</td>
+<td>Biến local</td>
+</tr>
+<tr>
+<td>PACKAGE</td>
+<td>Package</td>
+</tr>
+<tr>
+<td>ANNOTATION_TYPE</td>
+<td>Một annotation khác</td>
+</tr>
+<tr>
+<td>TYPE_USE</td>
+<td>Vị trí sử dụng kiểu dữ liệu</td>
+</tr>
+</tbody>
+</table>
+<p>Có thể cho phép nhiều vị trí:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Target({ElementType.TYPE, ElementType.METHOD})</span>
+<span class="hljs-meta">@interface</span> Loggable {
+}
+</div></code></pre>
+<h2 id="7-retention">7. @Retention</h2>
+<p>@Retention quy định annotation tồn tại đến thời điểm nào.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.annotation.Retention;
+<span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;
+
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> Description {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">value</span><span class="hljs-params">()</span>;
+}
+</div></code></pre>
+<p>Các mức retention:</p>
+<table>
+<thead>
+<tr>
+<th>Chính sách</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOURCE</td>
+<td>Chỉ tồn tại trong mã nguồn</td>
+</tr>
+<tr>
+<td>CLASS</td>
+<td>Có trong file .class nhưng thường không đọc được lúc runtime</td>
+</tr>
+<tr>
+<td>RUNTIME</td>
+<td>Có thể đọc bằng Reflection lúc chương trình chạy</td>
+</tr>
+</tbody>
+</table>
+<p>Nếu muốn đọc annotation bằng Reflection, cần dùng RetentionPolicy.RUNTIME.</p>
+<h2 id="8-%C4%91%E1%BB%8Dc-annotation-b%E1%BA%B1ng-reflection">8. Đọc Annotation bằng Reflection</h2>
+<p>Ví dụ annotation:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.annotation.Retention;
+<span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;
+
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> Table {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">name</span><span class="hljs-params">()</span>;
+}
+</div></code></pre>
+<p>Gắn annotation vào class:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Table(name = &quot;students&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+<p>Đọc annotation:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">Class</span>&lt;Student&gt; <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> Student.class;
+
+        <span class="hljs-keyword">if</span> (clazz.isAnnotationPresent(Table.class)) {
+            <span class="hljs-type">Table</span> <span class="hljs-variable">table</span> <span class="hljs-operator">=</span> clazz.getAnnotation(Table.class);
+            System.out.println(table.name()); <span class="hljs-comment">// students</span>
+        }
+    }
+}
+</div></code></pre>
+<p>Reflection cho phép chương trình kiểm tra metadata của class trong lúc chạy.</p>
+<h2 id="9-%C4%91%E1%BB%8Dc-annotation-c%E1%BB%A7a-method">9. Đọc Annotation của Method</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.annotation.Retention;
+<span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;
+<span class="hljs-keyword">import</span> java.lang.reflect.Method;
+
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@interface</span> Execute {
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title class_">Task</span> {
+    <span class="hljs-meta">@Execute</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> {
+        System.out.println(<span class="hljs-string">&quot;Task đang chạy&quot;</span>);
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (Method method : Task.class.getDeclaredMethods()) {
+    <span class="hljs-keyword">if</span> (method.isAnnotationPresent(Execute.class)) {
+        System.out.println(<span class="hljs-string">&quot;Tìm thấy method: &quot;</span> + method.getName());
+    }
+}
+</div></code></pre>
+<h2 id="10-annotation-c%C3%B3-thu%E1%BB%99c-t%C3%ADnh-value">10. Annotation có thuộc tính value</h2>
+<p>Nếu annotation chỉ có một thuộc tính tên là value, có thể bỏ tên thuộc tính khi sử dụng.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@interface</span> Column {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">value</span><span class="hljs-params">()</span>;
+}
+</div></code></pre>
+<p>Hai cách viết sau tương đương:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Column(value = &quot;student_name&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-meta">@Column(&quot;student_name&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+<h2 id="11-repeatable-annotation">11. Repeatable Annotation</h2>
+<p>Một annotation có thể được sử dụng nhiều lần trên cùng một thành phần nếu được đánh dấu bằng @Repeatable.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.annotation.Repeatable;
+
+<span class="hljs-meta">@Repeatable(Roles.class)</span>
+<span class="hljs-meta">@interface</span> Role {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">value</span><span class="hljs-params">()</span>;
+}
+
+<span class="hljs-meta">@interface</span> Roles {
+    <span class="hljs-type">Role</span>[] <span class="hljs-title function_">value</span><span class="hljs-params">()</span>;
+}
+</div></code></pre>
+<p>Sử dụng:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Role(&quot;ADMIN&quot;)</span>
+<span class="hljs-meta">@Role(&quot;EDITOR&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+}
+</div></code></pre>
+<h2 id="12-annotation-trong-framework">12. Annotation trong Framework</h2>
+<p>Annotation được sử dụng rất nhiều trong các framework Java.</p>
+<p>Ví dụ với Spring:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> {
+}
+</div></code></pre>
+<p>Ví dụ với JPA:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Entity</span>
+<span class="hljs-meta">@Table(name = &quot;students&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+<p>Ví dụ với JUnit:</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Test</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">shouldAddTwoNumbers</span><span class="hljs-params">()</span> {
+}
+</div></code></pre>
+<p>Framework đọc annotation và thực hiện hành vi tương ứng.</p>
+<h2 id="13-annotation-kh%C3%B4ng-t%E1%BB%B1-th%E1%BB%B1c-hi%E1%BB%87n-h%C3%A0nh-vi">13. Annotation không tự thực hiện hành vi</h2>
+<p>Annotation chỉ là metadata. Nó không tự động chạy logic nếu không có compiler, JVM, framework hoặc code Reflection xử lý nó.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@Author(name = &quot;An&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+<p>Muốn in tên tác giả, cần đọc annotation:</p>
+<pre class="hljs"><code><div><span class="hljs-type">Author</span> <span class="hljs-variable">author</span> <span class="hljs-operator">=</span> Student.class.getAnnotation(Author.class);
+System.out.println(author.name());
+</div></code></pre>
+<h2 id="14-%C4%91i%E1%BB%83m-ch%C3%ADnh">14. Điểm chính</h2>
+<ul>
+<li>Annotation bắt đầu bằng ký hiệu @.</li>
+<li>Annotation cung cấp metadata cho compiler, JVM hoặc framework.</li>
+<li>Dùng @interface để tạo custom annotation.</li>
+<li>@Target xác định vị trí annotation được sử dụng.</li>
+<li>@Retention xác định thời gian tồn tại của annotation.</li>
+<li>Dùng RetentionPolicy.RUNTIME nếu cần đọc bằng Reflection.</li>
+<li>Annotation không tự thực hiện hành vi nếu không có code xử lý.</li>
+<li>@Override, @Deprecated, @SuppressWarnings và @FunctionalInterface là các annotation phổ biến.</li>
+</ul>
+<h2 id="15-th%E1%BB%B1c-h%C3%A0nh-t%E1%BB%91t">15. Thực hành tốt</h2>
+<ul>
+<li>Đặt tên annotation rõ nghĩa.</li>
+<li>Chỉ cho phép vị trí cần thiết bằng @Target.</li>
+<li>Dùng giá trị mặc định hợp lý cho thuộc tính.</li>
+<li>Dùng RUNTIME khi annotation cần được đọc lúc chạy.</li>
+<li>Không lạm dụng Reflection vì có thể làm code khó theo dõi.</li>
+<li>Không dùng @SuppressWarnings để che giấu lỗi chưa hiểu rõ.</li>
+<li>Viết tài liệu cho custom annotation có ảnh hưởng đến framework.</li>
+</ul>
+<h2 id="16-c%C3%A1c-l%E1%BB%97i-th%C6%B0%E1%BB%9Dng-g%E1%BA%B7p">16. Các lỗi thường gặp</h2>
+<table>
+<thead>
+<tr>
+<th>Lỗi</th>
+<th>Nguyên nhân</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Annotation không đọc được bằng Reflection</td>
+<td>Thiếu @Retention(RetentionPolicy.RUNTIME)</td>
+</tr>
+<tr>
+<td>Annotation đặt sai vị trí</td>
+<td>@Target không cho phép vị trí đó</td>
+</tr>
+<tr>
+<td>Thiếu thuộc tính bắt buộc</td>
+<td>Annotation element không có default</td>
+</tr>
+<tr>
+<td>Dùng nhiều lần nhưng không có @Repeatable</td>
+<td>Annotation không hỗ trợ lặp</td>
+</tr>
+<tr>
+<td>Nghĩ annotation tự chạy logic</td>
+<td>Chưa có code hoặc framework xử lý</td>
+</tr>
+<tr>
+<td>@Override báo lỗi</td>
+<td>Method không thực sự override method của class cha</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-ghi-nh%E1%BB%9B">17. Ghi nhớ</h2>
+<pre class="hljs"><code><div>Annotation = metadata gắn vào code
+</div></code></pre>
+<pre class="hljs"><code><div>@Target    → Annotation được đặt ở đâu?
+@Retention → Annotation tồn tại đến khi nào?
+Reflection → Đọc annotation lúc runtime
+</div></code></pre>
+<p>Ví dụ tổng quát:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.annotation.ElementType;
+<span class="hljs-keyword">import</span> java.lang.annotation.Retention;
+<span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;
+<span class="hljs-keyword">import</span> java.lang.annotation.Target;
+
+<span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span>
+<span class="hljs-meta">@Target(ElementType.TYPE)</span>
+<span class="hljs-meta">@interface</span> EntityInfo {
+    <span class="hljs-type">String</span> <span class="hljs-title function_">name</span><span class="hljs-params">()</span>;
+}
+
+<span class="hljs-meta">@EntityInfo(name = &quot;Student&quot;)</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+}
+</div></code></pre>
+
+</body>
+</html>
